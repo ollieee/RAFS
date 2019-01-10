@@ -1,0 +1,2 @@
+# RAFS
+Stripped RAF algorithm
