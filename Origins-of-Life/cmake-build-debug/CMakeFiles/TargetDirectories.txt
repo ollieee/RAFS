@@ -1,0 +1,3 @@
+/Users/ollie/Downloads/Origins-of-Life/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/ollie/Downloads/Origins-of-Life/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/ollie/Downloads/Origins-of-Life/cmake-build-debug/CMakeFiles/Origins_of_Life.dir

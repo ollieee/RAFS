@@ -1,0 +1,101 @@
+# MAX RAF TESTER
+# Comment out lines by beginning them with #
+# Empty food sets / molecule sets are not allowed.
+# To indicate an empty product / expected set of reactions, place a semicolon after a space
+# E.g.
+#   r1: f1 -(p2)-> ;
+#   Expected: ;
+# This is needed as if the last character is a space, it is often deleted upon save for compression reasons.
+# Also: Include exactly one blank line between each test case beside the first one (for now)
+#
+# Test 1
+Molecules: f1 f2 f3 f4 f5 p1 p2 p3 p4
+FoodSet: f1 f2 f3 f4 f5
+Reactions:
+r1: f1 p3 -(p2)-> p4 p1
+r2: f4 f5 -(p4)-> p1
+r3: f2 p1 -(p3)-> p2
+r4: p2 f3 -(p1)-> p3
+Expected: r1 r4 r3 r2
+
+# Psuedo-RAF
+Molecules: 30 15 2
+FoodSet: 2
+Reactions:
+r1: 30 -(2)-> 15 2
+r2: 15 2 -(2)-> 30
+Expected: ;
+
+# Pseudo-RAF
+Molecules: f1 f2 f3 f4 f5 p1 p2 p3 p4
+FoodSet: f1 f2 f3 f4 f5
+Reactions:
+r1: f1 p3 -(p2)-> ;
+r3: f2 p1 -(p3)-> p2
+r4: p2 f3 -(p1)-> p3
+Expected: ;
+
+# HS2003
+Molecules: a b c d
+FoodSet: a b
+Reactions:
+r1: a b -(d)-> c
+r2: b c -(a)-> d
+Expected: r1 r2
+
+# Testing uniqueness of deletion queue
+Molecules: f1 p1 p2 p3 p4
+FoodSet: f1
+Reactions:
+r1: f1 -(p3)-> p1 p2
+r2: p1 -(p2)-> p4
+Expected: ;
+
+# HS2012
+Molecules: a b c d e f g h
+FoodSet: a b c
+Reactions:
+r1: a b -(d)-> h
+r2: b c h -(a)-> d
+r3: c d -()-> e f
+r4: e a -(f)-> g
+Expected: r1 r2
+
+# HS2012 adapted 1
+Molecules: a b c d e f g h
+FoodSet: a b c
+Reactions:
+r1: a b -(d)-> h
+r2: b c h -(a)-> d
+r3: c d -()-> e f
+r4: e a -(h)-> g
+Expected: r1 r2
+
+# HS2012 adapted 2
+Molecules: a b c d e f g h
+FoodSet: a b c
+Reactions:
+r1: a b -(d)-> h
+r2: b c h -(a)-> d e
+r3: c d -()-> e f
+r4: e a -(h)-> g
+Expected: r1 r2 r4
+
+# HS2013 Pseudo raf
+Molecules: f1 f2 f3 p1 p2 p3 p4
+FoodSet: f1 f2 f3
+Reactions:
+r1: f1 p3 -(f1)-> p1 p4
+r2: f2 p1 -(f2)-> p2
+r3: p2 f3 -(f3)-> p3
+Expected: ;
+
+# HS2013 raf
+Molecules: f1 f2 f3 f4 f5 p1 p2 p3 p4
+FoodSet: f1 f2 f3 f4 f5
+Reactions:
+r1: f1 p3 -(f1)-> p1 p4
+r2: f2 p1 -(f2)-> p2
+r3: p2 f3 -(f3)-> p3
+r4: f4 f5 -(f4)-> p1
+Expected: r1 r2 r3 r4
